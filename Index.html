@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gessy Alves | Oficial</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --bg: #0b0b0f;
+            --card-bg: rgba(255, 255, 255, 0.05);
+            --accent: #c400ff;
+            --accent-soft: #7a00ff;
+            --text: #ffffff;
+            --gray: #b3b3b3;
+            --glass-border: rgba(255, 255, 255, 0.1);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            overflow-x: hidden;
+        }
+
+        section { padding: 80px 8%; }
+
+        /* Hero com Overlay para melhor leitura */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(11,11,15,1)), url('foto-capa.jpg') center/cover no-repeat;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 8vw, 5rem);
+            font-weight: 800;
+            letter-spacing: 5px;
+            text-shadow: 0 0 30px var(--accent);
+            text-transform: uppercase;
+        }
+
+        .hero p {
+            margin-top: 15px;
+            font-size: 1.2rem;
+            color: var(--gray);
+            letter-spacing: 2px;
+        }
+
+        /* Botões Estilizados */
+        .buttons { margin-top: 40px; display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; }
+        
+        .btn {
+            padding: 16px 32px;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            text-decoration: none;
+            border-radius: 50px;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .btn-primary { background: var(--accent); color: #fff; box-shadow: 0 10px 20px rgba(196, 0, 255, 0.3); }
+        .btn-primary:hover { background: var(--accent-soft); transform: translateY(-5px); }
+
+        .btn-outline { border: 2px solid var(--accent); color: #fff; }
+        .btn-outline:hover { background: var(--accent); transform: translateY(-5px); }
+
+        .title { font-size: 2.5rem; margin-bottom: 50px; text-align: center; position: relative; }
+        .title::after { content: ''; width: 60px; height: 4px; background: var(--accent); position: absolute; bottom: -15px; left: 50%; transform: translateX(-50%); }
+
+        /* Seção Música e Vídeos */
+        .grid-media { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
+        
+        .video-wrapper {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+            height: 0;
+            overflow: hidden;
+            border-radius: 15px;
+            border: 1px solid var(--glass-border);
+        }
+
+        .video-wrapper iframe {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+        }
+
+        /* Efeito de Vidro na Agenda e Status */
+        .glass-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(12px);
+            border: 1px solid var(--glass-border);
+            border-radius: 15px;
+            padding: 30px;
+            transition: 0.3s;
+        }
+
+        .agenda-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            margin-bottom: 15px;
+            border-left: 5px solid var(--accent);
+        }
+
+        .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 20px; margin-top: 40px; }
+        .stat h3 { font-size: 2.5rem; color: var(--accent); margin-bottom: 5px; }
+
+        /* Galeria */
+        .gallery { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; }
+        .gallery img { width: 100%; aspect-ratio: 1/1; object-fit: cover; border-radius: 10px; cursor: pointer; transition: 0.5s; }
+        .gallery img:hover { filter: brightness(1.2) saturate(1.2); transform: scale(1.03); }
+
+        /* Rodapé e Redes Sociais */
+        .social-links { margin: 30px 0; display: flex; justify-content: center; gap: 25px; font-size: 1.8rem; }
+        .social-links a { color: var(--text); transition: 0.3s; }
+        .social-links a:hover { color: var(--accent); transform: scale(1.2); }
+
+        footer { text-align: center; padding: 50px 0; background: #050508; color: #555; border-top: 1px solid #111; }
+
+        /* Botão Flutuante WhatsApp */
+        .float-wpp {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: #25d366;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+            color: white;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+            z-index: 100;
+            transition: 0.3s;
+        }
+        .float-wpp:hover { transform: scale(1.1); }
+
+        @media(max-width: 768px) {
+            .agenda-item { flex-direction: column; text-align: center; gap: 10px; }
+            section { padding: 60px 5%; }
+        }
+    </style>
+</head>
+<body>
+
+    <a href="https://wa.me/5587991659190" class="float-wpp" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <section class="hero">
+        <div>
+            <h1>GESSY ALVES</h1>
+            <p>A VOZ QUE ARRASTA MULTIDÕES</p>
+            <div class="buttons">
+                <a href="#music" class="btn btn-primary"><i class="fas fa-play"></i> Ouvir Agora</a>
+                <a href="#contact" class="btn btn-outline"><i class="fas fa-calendar-check"></i> Contratar Show</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="music">
+        <h2 class="title">Lançamentos</h2>
+        <div class="grid-media">
+            <div class="glass-card">
+                <iframe src="https://open.spotify.com/embed/artist/7nOd2Oq6CWbTxfa47Fr3nM"
+width="100%" height="352" frameborder="0"
+allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture">
+</iframe>
+            </div>
+            <div class="video-wrapper">
+               <iframe 
+src="https://www.youtube.com/embed/xgD6mwlLRMY?autoplay=1&mute=1&loop=1&playlist=xgD6mwlLRMY"
+title="Gessy Alves Clipe"
+frameborder="0"
+allow="autoplay; encrypted-media"
+allowfullscreen>
+</iframe>
+            </div>
+        </div>
+    </section>
+
+    <section class="about glass-card" style="margin: 0 8%; border-radius: 30px;">
+        <h2 class="title">Sobre Gessy</h2>
+        <p style="max-width: 800px; margin: auto; line-height: 1.8; text-align: center; font-size: 1.1rem; color: var(--gray);">
+            Com presença marcante e carisma explosivo, Gessy Alves vem consolidando seu nome no cenário musical. 
+            Misturando a energia do piseiro com a emoção da sofrência, cada show é uma experiência única de conexão com o público.
+        </p>
+        <div class="stats">
+            <div class="stat" style="text-align: center;">
+                <h3>+4K</h3>
+                <span>Ouvintes Mensais</span>
+            </div>
+            <div class="stat" style="text-align: center;">
+                <h3>+100</h3>
+                <span>Cidades Visitadas</span>
+            </div>
+            <div class="stat" style="text-align: center;">
+                <h3>Top</h3>
+                <span>Rankings Regionais</span>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <h2 class="title">Galeria</h2>
+        <div class="gallery">
+            <img src="foto1.jpg" alt="Show Gessy Alves">
+            <img src="foto2.jpg" alt="Gessy Alves no Estúdio">
+            <img src="foto3.jpg" alt="Gessy Alves Live">
+            <img src="foto4.jpg" alt="Fãs Gessy">
+        </div>
+    </section>
+
+    <section id="agenda">
+        <h2 class="title">Próximos Shows</h2>
+        <div class="agenda-item glass-card">
+            <div><strong>20 MAR</strong> • Petrolina - PE</div>
+            <a href="https://wa.me/5587991659190" class="btn-outline" style="padding: 8px 20px; border-radius: 5px; text-decoration: none; font-size: 0.8rem;">INFORMAÇÕES</a>
+        </div>
+        <div class="agenda-item glass-card">
+            <div><strong>05 ABR</strong> • Juazeiro - BA</div>
+            <span style="color: var(--accent); font-weight: bold;">ESGOTADO</span>
+        </div>
+        <div class="agenda-item glass-card">
+            <div><strong>12 ABR</strong> • Evento Privado</div>
+            <i class="fas fa-lock" style="color: var(--gray);"></i>
+        </div>
+    </section>
+
+    <section id="contact" class="contact">
+        <h2 class="title">Contratação</h2>
+        <p style="margin-bottom: 30px; color: var(--gray);">Disponível para shows, festas de cidade e eventos corporativos.</p>
+      <div class="social-links">
+    <a href="https://www.instagram.com/gessyalvez" target="_blank" rel="noopener" title="Instagram Oficial">
+        <i class="fab fa-instagram"></i>
+    </a>
+    
+    <a href="https://www.tiktok.com/@gessyalvez" target="_blank" rel="noopener" title="TikTok">
+        <i class="fab fa-tiktok"></i>
+    </a>
+    
+    <a href="https://youtube.com/@gessyalvezoficial" target="_blank" rel="noopener" title="YouTube Oficial">
+        <i class="fab fa-youtube"></i>
+    </a>
+    
+    <a href="https://www.instagram.com/omnistudiosforce" target="_blank" rel="noopener" title="Omni Studios Force (Gravação)">
+        <i class="fas fa-microphone-lines"></i>
+    </a>
+</div>
+
+
+        <div class="buttons">
+            <a href="https://wa.me/5587991659190?text=Olá,%20gostaria%20de%20consultar%20a%20agenda%20de%20Gessy%20Alves" class="btn btn-primary">
+                <i class="fab fa-whatsapp"></i> Falar com Empresário
+            </a>
+            <a href="mailto:arthursilvanascimentodo@gmail.com" class="btn btn-outline">
+                <i class="fas fa-envelope"></i> Enviar Email
+            </a>
+        </div>
+    </section>
+
+    <footer>
+        © 2026 Gessy Alves Oficial. <br>
+        <small style="margin-top: 10px; display: block;">Desenvolvido com foco em alta performance musical.</small>
+    </footer>
+
+</body>
+</html>
